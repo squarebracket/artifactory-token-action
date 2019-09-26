@@ -24,6 +24,7 @@ async function run() {
     const promise = new Promise((resolve, reject) => {
         const postData = stringify({
             scope: 'member-of-groups:writers',
+            expires_in: core.getInput('expiresIn') || 300,
             username: tokenUsername,
         });
         const options = {
@@ -61,7 +62,7 @@ async function run() {
             res.on('end', () => {
                 try {
                     const parsedData = JSON.parse(rawData);
-                    core.setOutput('artifactory-token', parsedData.access_token);
+                    core.exportSecret('ARTIFACTORY_TOKEN', parsedData.access_token);
                     resolve();
                 } catch (e) {
                     core.error(e.message);
