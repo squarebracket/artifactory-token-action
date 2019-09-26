@@ -62,7 +62,7 @@ async function run() {
             res.on('end', () => {
                 try {
                     const parsedData = JSON.parse(rawData);
-                    core.exportSecret('ARTIFACTORY_TOKEN', parsedData.access_token);
+                    core.exportSecret('PASSWORD', parsedData.access_token);
                     resolve();
                 } catch (e) {
                     core.error(e.message);
