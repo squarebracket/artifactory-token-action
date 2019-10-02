@@ -63,6 +63,7 @@ async function run() {
                 try {
                     const parsedData = JSON.parse(rawData);
                     core.exportVariable('PASSWORD', parsedData.access_token);
+                    core.setSecret(parsedData.access_token);
                     resolve();
                 } catch (e) {
                     core.error(e.message);
